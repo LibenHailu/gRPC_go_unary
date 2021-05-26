@@ -13,6 +13,16 @@ type server struct {
 	greetpb.UnimplementedGreetServiceServer
 }
 
+func (*server)Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error){
+	fmt.Printf("Greet funciton was invoked with %v \n",req)
+	firstName:=req.GetGreeting().FirstName
+	result :="Hello" + firstName
+	res := &greetpb.GreetResponse{
+		Result: result,
+	}
+	return res, nil
+}
+
 func main() {
 
 	fmt.Println("Calculator Server ")
